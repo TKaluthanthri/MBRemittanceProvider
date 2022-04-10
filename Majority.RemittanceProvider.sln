@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.IdentityServer", "Majority.RemittanceProvider\Majority.RemittanceProvider.IdentityServer.csproj", "{8A39606F-DCC8-4C8D-A715-E32C17745ADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.API", "Majority.RemittanceProvider.API\Majority.RemittanceProvider.API.csproj", "{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A39606F-DCC8-4C8D-A715-E32C17745ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A39606F-DCC8-4C8D-A715-E32C17745ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A39606F-DCC8-4C8D-A715-E32C17745ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A39606F-DCC8-4C8D-A715-E32C17745ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEA99E91-D142-4CFF-A2EA-6408A9FDDA71}
+	EndGlobalSection
+EndGlobal
