@@ -7,9 +7,20 @@ namespace Majority.RemittanceProvider.IdentityServer.Models
     {
         public static void AddRemittanceProviderCoreConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<RemittanceProviderConfiguration>(configuration.GetSection("ClientSecret"));
-            services.Configure<RemittanceProviderConfiguration>(configuration.GetSection("ClientId"));
-            services.Configure<RemittanceProviderConfiguration>(configuration.GetSection("ClientName"));
+            services.Configure<ApplicationConfigurations>(configuration.GetSection("RemittanceProviderConfiguration"));
+            services.AddSingleton(sp =>
+            {
+                var config = configuration.GetSection("RemittanceProviderConfiguration").Get<ApplicationConfigurations>();
+                return new ApplicationConfigurations
+                {
+                    ClientId = config.ClientId,
+                    ClientSecret = config.ClientSecret,
+                    ClientName = config.ClientName,
+                    ClientScope = config.ClientScope,
+
+                };
+            });
+
         }
     }
 }

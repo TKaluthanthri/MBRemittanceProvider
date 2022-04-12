@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Majority.RemittanceProvider.API.Controllers
 {
     [ApiController]
-    [Route("[api/controller]")]
+    [Route("[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly IIdentityServerService _iIdentityServerService;
@@ -27,7 +27,7 @@ namespace Majority.RemittanceProvider.API.Controllers
         }
 
         [HttpGet]
-        [Route("get-token")]
+        [Route("api/get-token")]
         public async Task<GenericUseCaseResult> GetToken(string Scope)
         {
             GenericUseCaseResult response = new GenericUseCaseResult();

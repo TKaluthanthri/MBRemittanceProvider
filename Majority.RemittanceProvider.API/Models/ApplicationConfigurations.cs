@@ -7,5 +7,6 @@
         public string ClientName { get; set; }
         public string ClientScope { get; set; }
         public string AuthorizeUrl { get; set; }
+        public string TokenIssuer { get; set; }
     }
 }

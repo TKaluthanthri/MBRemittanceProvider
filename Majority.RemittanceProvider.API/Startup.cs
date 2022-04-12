@@ -30,16 +30,13 @@ namespace Majority.RemittanceProvider.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRemittanceProviderCoreConfig(Configuration);
-           
-
+          
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Majority.RemittanceProvider.API", Version = "v1" });
             });
-
             services.AddMemoryCache();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,9 +50,8 @@ namespace Majority.RemittanceProvider.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
