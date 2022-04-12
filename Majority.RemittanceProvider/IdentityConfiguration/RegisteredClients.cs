@@ -21,7 +21,7 @@ namespace Majority.RemittanceProvider.IdentityServer.IdentityConfiguration
                     ClientName = "ASP.NET Core Weather Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = new List<Secret> {new Secret(config.GetSection("RemittanceProviderConfiguration:ClientSecret").Value.Sha256())},
-                    AllowedScopes = new List<string> {"weatherApi.read"}
+                    AllowedScopes = new List<string> { "RemittanceProviderApi.read" }
             },
             new Client
             {

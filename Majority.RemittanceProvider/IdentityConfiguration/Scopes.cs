@@ -9,8 +9,8 @@ namespace Majority.RemittanceProvider.IdentityServer.IdentityConfiguration
         {
             return new[]
             {
-                new ApiScope("weatherApi.read", "Read Access to Weather API"),
-                new ApiScope("weatherApi.write", "Write Access to Weather API"),
+                new ApiScope("RemittanceProviderApi.read", "Read Access to RemittanceProviderApi API"),
+                new ApiScope("RemittanceProviderApi.write", "Write Access to RemittanceProviderApi API"),
             };
         }
     }

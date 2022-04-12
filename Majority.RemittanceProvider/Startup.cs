@@ -1,4 +1,5 @@
 using Majority.RemittanceProvider.IdentityServer.IdentityConfiguration;
+using Majority.RemittanceProvider.IdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +40,8 @@ namespace Majority.RemittanceProvider
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Majority.RemittanceProvider", Version = "v1" });
             });
+
+            services.AddRemittanceProviderCoreConfig(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +55,7 @@ namespace Majority.RemittanceProvider
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
