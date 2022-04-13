@@ -22,13 +22,21 @@ namespace Majority.RemittanceProvider.API.Controllers
         private readonly ILogger<BankController> _logger;
         private readonly ApplicationConfigurations _appConfiguration;
         private readonly ICountryRepository _countryRepository;
-        public BankController(ILogger<BankController> logger, IIdentityServerService IidentityServerService, ApplicationConfigurations appConfiguration, ICountryRepository countryRepository)
+        private readonly IBankRepository _bankRepository;
+        public BankController(
+            ILogger<BankController> logger, 
+            IIdentityServerService IidentityServerService, 
+            ApplicationConfigurations appConfiguration, 
+            ICountryRepository countryRepository,
+            IBankRepository bankRepository
+            )
         {
             _logger = logger;
             _iIdentityServerService = IidentityServerService;
             _appConfiguration = appConfiguration;
             _countryRepository = countryRepository;
-        }
+            _bankRepository = bankRepository;
+        } 
 
 
         [HttpPost]
@@ -39,12 +47,12 @@ namespace Majority.RemittanceProvider.API.Controllers
             GenericUseCaseResult response = new GenericUseCaseResult();
             try
             {
-                var countryList = await _countryRepository.GetAllAsync();
+                var bankList = await _bankRepository.GetAllBanksAsync();
                 response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
                 response.IsSuccess = true;
               
-                response.Result = (from country in countryList
-                              select new { country.Name, country.Code }).ToArray();
+                response.Result = (from bank in bankList
+                                   select new { bank.Name, bank.BankCode }).ToArray();
             }
             catch (Exception ex)
             {
@@ -58,12 +66,24 @@ namespace Majority.RemittanceProvider.API.Controllers
 
         [HttpPost]
         [Route("get-beneficiary-name")]
-        public async Task<GenericUseCaseResult> GetBeneficiaryName(string Scope)
+        public async Task<GenericUseCaseResult> GetBeneficiaryName([FromBody] AccountDetailsRequest request)
         {
             GenericUseCaseResult response = new GenericUseCaseResult();
             try
             {
+                if (!String.IsNullOrEmpty(request.AccountNumber) && !String.IsNullOrEmpty(request.BankCode))
+                {
+                    var accountDetails = await _bankRepository.GetBeneficiaryName(request.AccountNumber, request.BankCode);
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
+                    response.IsSuccess = true;
+                    string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "")+" "+(!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "") ;
+                    response.Result = new { accountName = fullName };
+                }
+                else {
 
+                    response.IsSuccess = false;
+                    response.Result = new { Error = "Failed to get Beneficiary Name " };
+                }
             }
             catch (Exception ex)
             {

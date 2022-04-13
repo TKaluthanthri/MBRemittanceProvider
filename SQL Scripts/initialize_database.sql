@@ -9,11 +9,14 @@ CREATE TABLE Country
 	Code VARCHAR(100)
 );
 
+
+
 CREATE TABLE State
 (
 	StateId INT IDENTITY PRIMARY KEY,
 	Name VARCHAR(100),
-	Country_Id INT UNIQUE FOREIGN KEY REFERENCES Country(Id)
+	Code VARCHAR(100),
+	Country_Id INT  FOREIGN KEY REFERENCES Country(Id)
 );
 
 CREATE TABLE Bank
@@ -53,16 +56,42 @@ CREATE TABLE Customer
 	CustomerCode VARCHAR(500)
 );
 
-CREATE TABLE TransactionDetails
+CREATE TABLE TransactionInfo
 (
 	Id INT IDENTITY PRIMARY KEY,
 	TransactionNumber VARCHAR(Max),
-	Amount  Decimal,
-	exchangeRate  VARCHAR(Max),
-	fees Decimal,
-	Transaction_Date DateTime,
-	Transaction_Status Varchar(200),
+	Amount  Decimal  (8,3),
+	ExchangeRate  VARCHAR(Max),
+	Fees Decimal  (8,3),
+	CreatedDate DateTime,
+	Status Varchar(200),
 	Country Varchar(200),
-	Sender_Id INT  FOREIGN KEY REFERENCES Customer(Id),
-	Receiver_Id INT  FOREIGN KEY REFERENCES Account(Id)
+	SenderId INT  FOREIGN KEY REFERENCES Customer(Id),
+	ReceiverId INT  FOREIGN KEY REFERENCES Account(Id)
 );
+
+
+
+Create Table ExchangeRates
+(
+	Id INT IDENTITY PRIMARY KEY,
+	FromCountry VARCHAR(Max),
+	ToCountry VARCHAR(Max),
+	ExchangeRate  decimal (8,3),
+	CurrencyType   VARCHAR(Max),
+	LastUpdatedDate DateTime,
+	ExchangeRateToken VARCHAR(Max)
+);
+
+
+Create Table ExchangeFee
+(
+	Id INT IDENTITY PRIMARY KEY,
+	FromAmount decimal  (8,3),
+	ToAmount decimal  (8,3),
+	Fee  decimal  (8,3),
+	LastUpdatedDate DateTime
+	
+);
+
+

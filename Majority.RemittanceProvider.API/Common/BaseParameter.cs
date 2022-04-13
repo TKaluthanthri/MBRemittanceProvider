@@ -14,4 +14,13 @@
         Failed = 440,
         ServiceUnavailable = 503
     }
+
+    public enum TransactionStatus
+    {
+
+        Completed = 200,
+        Pending = 201 ,
+        Canceled = 202,
+        Declined = 203
+    }
 }

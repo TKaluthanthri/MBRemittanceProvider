@@ -31,7 +31,8 @@ namespace Majority.RemittanceProvider.API.Configuration
             });
             services.AddScoped<TokenAuthenticationFilter>();
             services.AddTransient<ICountryRepository, CountryRepository>();
-
+            services.AddTransient<IBankRepository, BankRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Majority.RemittanceProvider.Infrastructure.Repositories
 
         public async Task<List<Country>> GetAllAsync()
         {
-            var sql = "SELECT * FROM Country";
+            var sql = "SELECT Id, Name, Code  FROM Country";
             using (var connection = new SqlConnection(configuration.GetConnectionString("Default")))
             {
                 connection.Open();
@@ -34,7 +34,7 @@ namespace Majority.RemittanceProvider.Infrastructure.Repositories
 
         public async Task<List<State>> GetAllStatesAsync()
         {
-            var sql = "SELECT * FROM State";
+            var sql = "SELECT StateId, Name, Code, Country_Id  FROM  State";
             using (var connection = new SqlConnection(configuration.GetConnectionString("Default")))
             {
                 connection.Open();
@@ -47,7 +47,7 @@ namespace Majority.RemittanceProvider.Infrastructure.Repositories
 
         public async Task<Country> GetByCodeAsync(string Name)
         {
-            var sql = "SELECT * FROM Country where Name = " + Name + "";
+            var sql = "SELECT Id, Name, Code FROM Country where Name = " + Name + "";
             using (var connection = new SqlConnection(configuration.GetConnectionString("Default")))
             {
                 connection.Open();
