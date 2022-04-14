@@ -11,5 +11,7 @@ namespace Majority.RemittanceProvider.Application.Interfaces
     {
         Task<List<Bank>> GetAllBanksAsync();
         Task<Account> GetBeneficiaryName(string accoutNumber, string bankCode);
+        Task<Bank> GetBankByCodeAsync(string code);
+        Task<bool> SaveBankAccount(Account accountDetails);
     }
 }

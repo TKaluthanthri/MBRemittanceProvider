@@ -30,7 +30,19 @@ namespace Majority.RemittanceProvider.Infrastructure.Repositories
                 connection.Open();
                 var result = await connection.QueryAsync<Bank>(sql);
                 return result.ToList();
-                connection.Close();
+
+            }
+        }
+
+        public async Task<Bank> GetBankByCodeAsync(string code)
+        {
+            var sql = "SELECT Id, Name, BankCode, Country_Id FROM Bank where BankCode = '" + code + "'";
+
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Bank>(sql);
+                return result.FirstOrDefault();
 
             }
         }
@@ -47,11 +59,56 @@ namespace Majority.RemittanceProvider.Infrastructure.Repositories
                         new { AccoutNumber = accoutNumber, BankCode = bankCode },
                         commandType: CommandType.StoredProcedure
                         );
-
                 return result.FirstOrDefault();
-                connection.Close();
 
             }
+
         }
+
+        public async Task<bool> SaveBankAccount(Account accountDetails)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        var isCreated = await connection.ExecuteAsync
+                                        ("INSERT INTO Account (AccountNumber, BankAccountName, FirstName, LastName, CreatedDate, UpdatedDate, Bank_Id)" +
+                                        " VALUES (@AccountNumber, @BankAccountName ,@FirstName, @LastName, @CreatedDate, @UpdatedDate, @Bank_Id)",
+                                        new
+                                        {
+                                            AccountNumber = accountDetails.AccountNumber,
+                                            BankAccountName = accountDetails.BankAccountName,
+                                            FirstName = accountDetails.FirstName,
+                                            LastName = accountDetails.LastName,
+                                            CreatedDate = accountDetails.CreatedDate,
+                                            UpdatedDate = accountDetails.UpdatedDate,
+                                            Bank_Id = accountDetails.Bank_Id
+
+                                        }, transaction);
+
+                        transaction.Commit();
+                        if (isCreated == 0)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
     }
 }

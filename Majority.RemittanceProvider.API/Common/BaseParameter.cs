@@ -7,7 +7,7 @@
     {
 
         Success = 200,
-        //Success = 201,
+        Created = 201,
         InvalidRequest = 400,
         Unauthorized = 401,
         Forbidden = 403,
@@ -19,8 +19,28 @@
     {
 
         Completed = 200,
-        Pending = 201 ,
+        Pending = 201,
         Canceled = 202,
         Declined = 203
+    }
+
+    public enum Status
+    {
+
+        Completed ,
+        Pending ,
+        Canceled ,
+        Declined 
+    }
+
+    public enum Codes
+    {
+
+        Success,
+        InvalidRequest,
+        Unauthorized,
+        Forbidden,
+        Failed,
+        ServiceUnavailable
     }
 }

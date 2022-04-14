@@ -36,13 +36,13 @@ namespace Majority.RemittanceProvider.API.Controllers
                 var OAuth2Token = await _iIdentityServerService.GetToken(Scope);
                 if ((ResponseCode)OAuth2Token.HttpStatusCode == ResponseCode.Success)
                 {
-                    response.IsSuccess = true;
+                    response.Status = Enum.GetName(Codes.Success);
                     response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
                     response.Result = new { AccessToken = OAuth2Token.AccessToken, Scope = OAuth2Token.Scope };
                 }
                 else
                 {
-                    response.IsSuccess = false;
+                    response.Status = Enum.GetName(Codes.Unauthorized);
                     response.HttpStatusCode = Convert.ToInt32(OAuth2Token.HttpStatusCode);
                     response.Result = new { Error = OAuth2Token.Error.ToString() };
                 }
@@ -51,7 +51,7 @@ namespace Majority.RemittanceProvider.API.Controllers
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
+                response.Status = Enum.GetName(Codes.ServiceUnavailable);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Account Controller:" + ex.InnerException);
             }

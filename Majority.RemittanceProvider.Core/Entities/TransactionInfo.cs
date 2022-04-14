@@ -11,6 +11,7 @@ namespace Majority.RemittanceProvider.Core.Entities
     {
         public int Id { get; set; }
         public string TransactionNumber { get; set; }
+        public string TransactionId { get; set; }
         public decimal Amount { get; set; }
         public decimal Fees { get; set; }
         public string ExchangeRate { get; set; }

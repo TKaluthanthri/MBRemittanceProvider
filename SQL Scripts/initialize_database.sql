@@ -60,6 +60,7 @@ CREATE TABLE TransactionInfo
 (
 	Id INT IDENTITY PRIMARY KEY,
 	TransactionNumber VARCHAR(Max),
+	TransactionId VARCHAR(Max),
 	Amount  Decimal  (8,3),
 	ExchangeRate  VARCHAR(Max),
 	Fees Decimal  (8,3),
@@ -69,7 +70,6 @@ CREATE TABLE TransactionInfo
 	SenderId INT  FOREIGN KEY REFERENCES Customer(Id),
 	ReceiverId INT  FOREIGN KEY REFERENCES Account(Id)
 );
-
 
 
 Create Table ExchangeRates

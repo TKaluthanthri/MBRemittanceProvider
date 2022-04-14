@@ -49,14 +49,14 @@ namespace Majority.RemittanceProvider.API.Controllers
             {
                 var bankList = await _bankRepository.GetAllBanksAsync();
                 response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                response.IsSuccess = true;
-              
+                response.Status = Enum.GetName(Codes.Success);
+
                 response.Result = (from bank in bankList
                                    select new { bank.Name, bank.BankCode }).ToArray();
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
+                response.Status = Enum.GetName(Codes.Failed);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Bank Controller:" + ex.InnerException);
             }
@@ -75,19 +75,19 @@ namespace Majority.RemittanceProvider.API.Controllers
                 {
                     var accountDetails = await _bankRepository.GetBeneficiaryName(request.AccountNumber, request.BankCode);
                     response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                    response.IsSuccess = true;
+                    response.Status = Enum.GetName(Codes.Success);
                     string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "")+" "+(!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "") ;
                     response.Result = new { accountName = fullName };
                 }
                 else {
 
-                    response.IsSuccess = false;
+                    response.Status = Enum.GetName(Codes.InvalidRequest);
                     response.Result = new { Error = "Failed to get Beneficiary Name " };
                 }
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
+                response.Status = Enum.GetName(Codes.Failed);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Bank Controller:" + ex.InnerException);
 

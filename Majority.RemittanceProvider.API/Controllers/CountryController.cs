@@ -38,21 +38,23 @@ namespace Majority.RemittanceProvider.API.Controllers
             try
             {
                 var countryList = await _countryRepository.GetAllAsync();
-                response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                response.IsSuccess = true;
+               
                 if (countryList.Count > 0)
                 {
                     response.Result = (from country in countryList
                                        select new { country.Name, country.Code }).ToArray();
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
+                    response.Status = Enum.GetName(Codes.Success);
                 }
                 else
                 {
+                    response.Status = Enum.GetName(Codes.InvalidRequest);
                     response.Result = new { message = "No Available countries" };
                 }
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
+                response.Status = Enum.GetName(Codes.Failed);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Country Controller:" + ex.InnerException);
             }
@@ -70,7 +72,7 @@ namespace Majority.RemittanceProvider.API.Controllers
             {
                 var stateList = await _countryRepository.GetAllStatesAsync();
                 response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                response.IsSuccess = true;
+                response.Status = Enum.GetName(Codes.Success);
                 if (stateList.Count > 0)
                 {
                     response.Result = (from state in stateList
@@ -83,7 +85,7 @@ namespace Majority.RemittanceProvider.API.Controllers
             }
             catch (Exception ex)
             {
-                response.IsSuccess = false;
+                response.Status = Enum.GetName(Codes.Failed);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Country Controller:" + ex.InnerException);
             }

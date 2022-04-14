@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Majority.RemittanceProvider.Test
+namespace Majority.RemittanceProvider.Test.Repositories
 {
-    public class AccountControllerTest
+    public class BankRepositoryFake : IBankRepositoryFake
     {
     }
 }

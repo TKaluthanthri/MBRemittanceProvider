@@ -33,6 +33,8 @@ namespace Majority.RemittanceProvider.API.Configuration
             services.AddTransient<ICountryRepository, CountryRepository>();
             services.AddTransient<IBankRepository, BankRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            
         }
     }
 }
