@@ -135,23 +135,32 @@ namespace Majority.RemittanceProvider.API.Controllers
             {
                 if (!String.IsNullOrEmpty(request.From) && !String.IsNullOrEmpty(request.To))
                 {
-                    ExchangeRateResponse exchangeRate = new ExchangeRateResponse();
-                    List<TransactionExchangeFeeResponse> exchangeFeesList = new List<TransactionExchangeFeeResponse>();
-
-                    var exchangeRates = await _transactionRepository.GetExchangeRates(request.To);
-                    var transactionAmountList = await _transactionRepository.GetTransactionFeeAmount();
-                    foreach (var item in transactionAmountList)
+                    if (request.From == "US")
                     {
-                        TransactionExchangeFeeResponse exchangeFeeObj = new TransactionExchangeFeeResponse();
+                        ExchangeRateResponse exchangeRate = new ExchangeRateResponse();
+                        List<TransactionExchangeFeeResponse> exchangeFeesList = new List<TransactionExchangeFeeResponse>();
 
-                        exchangeFeeObj.Amount = (Math.Round(item.FromAmount, 2).ToString() + " - " + Math.Round(item.ToAmount, 2).ToString());
-                        exchangeFeeObj.Fee =  CalculateExchangeFee(exchangeRates.ExchangeRate, item.Fee);
-                        exchangeFeesList.Add(exchangeFeeObj);
+                        var exchangeRates = await _transactionRepository.GetExchangeRates(request.To);
+                        var transactionAmountList = await _transactionRepository.GetTransactionFeeAmount();
+                        foreach (var item in transactionAmountList)
+                        {
+                            TransactionExchangeFeeResponse exchangeFeeObj = new TransactionExchangeFeeResponse();
+
+                            exchangeFeeObj.Amount = (Math.Round(item.FromAmount, 2).ToString() + " - " + Math.Round(item.ToAmount, 2).ToString());
+                            exchangeFeeObj.Fee = CalculateExchangeFee(exchangeRates.ExchangeRate, item.Fee);
+                            exchangeFeesList.Add(exchangeFeeObj);
+                        }
+
+                        response.Status = Enum.GetName(Codes.Success);
+                        response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
+                        response.Result = exchangeFeesList;
                     }
-
-                    response.Status = Enum.GetName(Codes.Success);
-                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                    response.Result = exchangeFeesList;
+                    else
+                    {
+                        response.Status = Enum.GetName(Codes.Forbidden);
+                        response.HttpStatusCode = Convert.ToInt32(ResponseCode.InvalidRequest);
+                        response.Result = new { Error = "All Fee calculated based from US" };
+                    }
                 }
                 else
                 {
