@@ -11,6 +11,7 @@ namespace Majority.RemittanceProvider.IdentityServer.IdentityConfiguration
             {
                 new ApiScope("RemittanceProviderApi.read", "Read Access to RemittanceProviderApi API"),
                 new ApiScope("RemittanceProviderApi.write", "Write Access to RemittanceProviderApi API"),
+                new ApiScope("TestAPI.write", "Write Access to TestAPI"),
             };
         }
     }

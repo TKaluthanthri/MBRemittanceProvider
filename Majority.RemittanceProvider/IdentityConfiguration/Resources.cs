@@ -28,11 +28,11 @@ namespace Majority.RemittanceProvider.IdentityServer.IdentityConfiguration
             {
                 new ApiResource
                 {
-                    Name = "weatherApi",
-                    DisplayName = "Weather Api",
+                    Name = "RemittanceProviderApi",
+                    DisplayName = "RemittanceProvider Api",
                     Description = "Allow the application to access RemittanceProvider Api on your behalf",
-                    Scopes = new List<string> { "weatherApi.read", "weatherApi.write"},
-                    ApiSecrets = new List<Secret> {new Secret("ProCodeGuide".Sha256())},
+                    Scopes = new List<string> { "RemittanceProvider.read", "RemittanceProvider.write"},
+                    ApiSecrets = new List<Secret> {new Secret("Test71263718".Sha256())},
                     UserClaims = new List<string> {"role"}
                 }
             };

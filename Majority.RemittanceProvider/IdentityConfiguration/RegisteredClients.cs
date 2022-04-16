@@ -22,7 +22,17 @@ namespace Majority.RemittanceProvider.IdentityServer.IdentityConfiguration
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = new List<Secret> {new Secret(config.GetSection("RemittanceProviderConfiguration:ClientSecret").Value.Sha256())},
                     AllowedScopes = new List<string> { "RemittanceProviderApi.read", "RemittanceProviderApi.write" }
+            },
+
+            new Client
+            {
+                    ClientId = config.GetSection("TestAPIConfiguration:ClientId").Value,
+                    ClientName = config.GetSection("TestAPIConfiguration:ClientId").Value,
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets = new List<Secret> {new Secret(config.GetSection("TestAPIConfiguration:ClientSecret").Value.Sha256())},
+                    AllowedScopes = new List<string> { config.GetSection("TestAPIConfiguration:ClientScope").Value }
             }
+
                     
                     //},
             //new Client

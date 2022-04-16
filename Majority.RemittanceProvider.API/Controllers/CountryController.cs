@@ -12,19 +12,16 @@ using System.Threading.Tasks;
 namespace Majority.RemittanceProvider.API.Controllers
 {
     [Route("[controller]")]
+    [ServiceFilter(typeof(TokenAuthenticationFilter))]
     [ApiController]
     public class CountryController : ControllerBase
     {
-        private readonly IIdentityServerService _iIdentityServerService;
         private readonly ILogger<BankController> _logger;
-        private readonly ApplicationConfigurations _appConfiguration;
         private readonly ICountryRepository _countryRepository;
 
-        public CountryController(ILogger<BankController> logger, IIdentityServerService IidentityServerService, ApplicationConfigurations appConfiguration, ICountryRepository countryRepository)
+        public CountryController(ILogger<BankController> logger, ICountryRepository countryRepository)
         {
             _logger = logger;
-            _iIdentityServerService = IidentityServerService;
-            _appConfiguration = appConfiguration;
             _countryRepository = countryRepository;
         }
 
@@ -38,7 +35,7 @@ namespace Majority.RemittanceProvider.API.Controllers
             try
             {
                 var countryList = await _countryRepository.GetAllAsync();
-               
+
                 if (countryList.Count > 0)
                 {
                     response.Result = (from country in countryList

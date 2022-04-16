@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.IdentityServer", "Majority.RemittanceProvider\Majority.RemittanceProvider.IdentityServer.csproj", "{8A39606F-DCC8-4C8D-A715-E32C17745ADF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.API", "Majority.RemittanceProvider.API\Majority.RemittanceProvider.API.csproj", "{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.Test", "Majority.RemittanceProvider.Test\Majority.RemittanceProvider.Test.csproj", "{3EFB0887-E7AE-40A7-AABC-FA8A78F99B18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.Core", "Majority.RemittanceProvider.Core\Majority.RemittanceProvider.Core.csproj", "{E46ED0B6-F957-4D2D-A52D-51123DB5359E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.Core", "Majority.RemittanceProvider.Core\Majority.RemittanceProvider.Core.csproj", "{E46ED0B6-F957-4D2D-A52D-51123DB5359E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.Infrastructure", "Majority.RemittanceProvider.Infrastructure\Majority.RemittanceProvider.Infrastructure.csproj", "{79CB71DA-ABC3-436A-9F14-783DB2C3E04F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.Infrastructure", "Majority.RemittanceProvider.Infrastructure\Majority.RemittanceProvider.Infrastructure.csproj", "{79CB71DA-ABC3-436A-9F14-783DB2C3E04F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Majority.RemittanceProvider.Application", "Majority.RemittanceProvider.Application\Majority.RemittanceProvider.Application.csproj", "{EDCC5A4B-DEA7-4C3E-B440-6A4A54AB9A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.Application", "Majority.RemittanceProvider.Application\Majority.RemittanceProvider.Application.csproj", "{EDCC5A4B-DEA7-4C3E-B440-6A4A54AB9A6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Majority.RemittanceProvider.UnitTest", "Majority.RemittanceProvider.UnitTest\Majority.RemittanceProvider.UnitTest.csproj", "{4FAB47D0-43A4-4DBF-84E5-3436689BA0A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B4CA9A5-C1A1-40D0-A46E-01E815C629D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EFB0887-E7AE-40A7-AABC-FA8A78F99B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EFB0887-E7AE-40A7-AABC-FA8A78F99B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EFB0887-E7AE-40A7-AABC-FA8A78F99B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EFB0887-E7AE-40A7-AABC-FA8A78F99B18}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E46ED0B6-F957-4D2D-A52D-51123DB5359E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E46ED0B6-F957-4D2D-A52D-51123DB5359E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E46ED0B6-F957-4D2D-A52D-51123DB5359E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{EDCC5A4B-DEA7-4C3E-B440-6A4A54AB9A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDCC5A4B-DEA7-4C3E-B440-6A4A54AB9A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDCC5A4B-DEA7-4C3E-B440-6A4A54AB9A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FAB47D0-43A4-4DBF-84E5-3436689BA0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FAB47D0-43A4-4DBF-84E5-3436689BA0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FAB47D0-43A4-4DBF-84E5-3436689BA0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FAB47D0-43A4-4DBF-84E5-3436689BA0A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Majority.RemittanceProvider.Test.Repositories
+namespace Majority.RemittanceProvider.UnitTest
 {
-    public class BankRepositoryFake : IBankRepositoryFake
+    public class CountryControllerTest
     {
     }
 }

@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 namespace Majority.RemittanceProvider.API.Controllers
 {
     [Route("[controller]")]
+    [ServiceFilter(typeof(TokenAuthenticationFilter))]
     [ApiController]
     public class TransactionController : ControllerBase
     {
-        private readonly IIdentityServerService _iIdentityServerService;
+
         private readonly ILogger<BankController> _logger;
         private readonly ApplicationConfigurations _appConfiguration;
         private readonly ICountryRepository _countryRepository;
@@ -25,7 +26,6 @@ namespace Majority.RemittanceProvider.API.Controllers
 
         public TransactionController(
             ILogger<BankController> logger,
-            IIdentityServerService IidentityServerService,
             ApplicationConfigurations appConfiguration,
             ICountryRepository countryRepository,
             IBankRepository bankRepository,
@@ -34,7 +34,6 @@ namespace Majority.RemittanceProvider.API.Controllers
             )
         {
             _logger = logger;
-            _iIdentityServerService = IidentityServerService;
             _appConfiguration = appConfiguration;
             _countryRepository = countryRepository;
             _bankRepository = bankRepository;
@@ -236,7 +235,7 @@ namespace Majority.RemittanceProvider.API.Controllers
                         account.FirstName = request.ToBankAccountName;
                         isBankAccountExist = await _bankRepository.SaveBankAccount(account);
                         transfereeId = (await _bankRepository.GetBeneficiaryName(account.AccountNumber, request.ToBankCode)).Id.ToString();
-                       
+
                     }
                 }
                 else
@@ -264,15 +263,16 @@ namespace Majority.RemittanceProvider.API.Controllers
 
                         await _transactionRepository.SaveTransactionDetails(transactionDetails);
                         var successTransactionInfo = await _transactionRepository.GetTransactionStatusById(transactionDetails.TransactionId);
-                        
+
                         response.HttpStatusCode = Convert.ToInt32(ResponseCode.Created);
                         response.Status = Enum.GetName(Codes.Success);
-                        response.Result = new { transactionId = successTransactionInfo.TransactionId, transactionStatus =  Status.Pending + " " + "payout to beneficiary" };
+                        response.Result = new { transactionId = successTransactionInfo.TransactionId, transactionStatus = Status.Pending + " " + "payout to beneficiary" };
                     }
-                    else {
+                    else
+                    {
                         response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
                         response.Status = Enum.GetName(Codes.Success);
-                        response.Result = new { transactionId = isExistingtransaction.TransactionId};
+                        response.Result = new { transactionId = isExistingtransaction.TransactionId };
                     }
                 }
                 else

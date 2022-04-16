@@ -13,15 +13,7 @@ namespace Majority.RemittanceProvider.API
     {
         public static void Main(string[] args)
         {
-            try
-            {
-                CreateHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

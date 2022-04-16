@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Majority.RemittanceProvider.Test.entities
+namespace Majority.RemittanceProvider.UnitTest.Models
 {
     public class Bank
     {

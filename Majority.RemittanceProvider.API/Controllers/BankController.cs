@@ -18,25 +18,17 @@ namespace Majority.RemittanceProvider.API.Controllers
     [ApiController]
     public class BankController : ControllerBase
     {
-        private readonly IIdentityServerService _iIdentityServerService;
         private readonly ILogger<BankController> _logger;
-        private readonly ApplicationConfigurations _appConfiguration;
-        private readonly ICountryRepository _countryRepository;
         private readonly IBankRepository _bankRepository;
+
         public BankController(
-            ILogger<BankController> logger, 
-            IIdentityServerService IidentityServerService, 
-            ApplicationConfigurations appConfiguration, 
-            ICountryRepository countryRepository,
+            ILogger<BankController> logger,
             IBankRepository bankRepository
             )
         {
             _logger = logger;
-            _iIdentityServerService = IidentityServerService;
-            _appConfiguration = appConfiguration;
-            _countryRepository = countryRepository;
             _bankRepository = bankRepository;
-        } 
+        }
 
 
         [HttpPost]
@@ -76,11 +68,11 @@ namespace Majority.RemittanceProvider.API.Controllers
                     var accountDetails = await _bankRepository.GetBeneficiaryName(request.AccountNumber, request.BankCode);
                     response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
                     response.Status = Enum.GetName(Codes.Success);
-                    string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "")+" "+(!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "") ;
+                    string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "") + " " + (!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "");
                     response.Result = new { accountName = fullName };
                 }
-                else {
-
+                else
+                {
                     response.Status = Enum.GetName(Codes.InvalidRequest);
                     response.Result = new { Error = "Failed to get Beneficiary Name " };
                 }
