@@ -744,4 +744,4 @@ sample postman request
 
 
 ## 6. Testing
-I do not included sandbox environment yet. but included fex xunit test cases
+I do not included sandbox environment yet. but included few xunit test cases
