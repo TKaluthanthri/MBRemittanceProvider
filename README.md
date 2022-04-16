@@ -744,4 +744,13 @@ sample postman request
 
 
 ## 6. Testing
-I do not included sandbox environment yet. but included few xunit test cases
+I do not included sandbox environment yet. but included few xunit intergration test for token validation 
+please refer the below repository for access intergartion tests
+
+https://github.com/TKaluthanthri/Majority.RemittanceProvider.IntegrationTest
+
+these are the test cases i've implemented 
+
+![testcases](https://user-images.githubusercontent.com/12220065/163662791-f67456f2-6bf3-4c3f-a8fb-792fb217e699.PNG)
+
+
