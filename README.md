@@ -13,12 +13,12 @@ created by : Thilini Kaluthanthri
 - [Database Diagram](#4-DBDiagram)
 - [Resources](#5-Resources)
   - [Get Exchange Rate](#51-Get-Exchange-Rate)
-  - [Get Country List](#52-Get-Country-List)
+  - [Get Bank List](#52-Get-Bank-List)
   - [Get Beneficiary Name](#53-Get-Beneficiary-Name)
-  - [Submit Transaction](#Submit-Transactions)
+  - [Submit Transaction](#54Submit-Transactions)
   - [Get State List](#55-Get-State-List)
   - [Get Transaction Status](#56-Get-Transaction-Status)
-  - [Get Bank List](#57-Get-Bank-List)
+  - [Get Country List](#57-Get-Country-List)
   - [Get Fees List](#58-Get-Fees-List)
 - [Testing](#6-testing)
 
@@ -151,7 +151,7 @@ sample postman request
 
 
 ### 5.2. Get Bank List
-Returns all the currently supported countries.
+Returns a list of banks with their respective code.
 ```
 POST https://localhost:44390/bank/get-bank-list
 ```
@@ -579,34 +579,25 @@ sample postman request
 ![GetTrans_State](https://user-images.githubusercontent.com/12220065/163568631-e4ff811f-bc27-4baa-9f46-fa0e7062dae9.PNG)
 
 
-### 5.7. Get Exchange Rate
-Returns the exchange rate for the specified destination rounded to 3 decimal places.
+### 5.7. Get Country List
+Returns all the currently supported countries.
 ```
-POST https://localhost:44390/Transaction/get-exchange-rate
+POST https://localhost:44390/country/get-country-list
 ```
 Where Authorization Bearer token is used for the authorized user.
 Example request:
 
 ```
-POST Transaction/get-exchange-rate HTTP/1.1
+POST country/get-country-list HTTP/1.1
 Host: https://localhost:44390/
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjZBN0FCNDY3NThEMTlFN0EyOEFCMzkzQTc0QUExOEQyIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2NDk4MjUxOTAsImV4cCI6MTY0OTgyODc5MCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNzAiLCJjbGllbnRfaWQiOiI0Mzg4NzI5NDQ2NjYtZWVtcHRubmxlcDJrM2Uyc2xpY2Y3MWRoM2ZrODBxMmgiLCJqdGkiOiIzMkZGOTNGQUExOEY0Q0MyQ0NDREU3QTZFOTA2RjYwQiIsImlhdCI6MTY0OTgyNTE5MCwic2NvcGUiOlsiUmVtaXR0YW5jZVByb3ZpZGVyQXBpLnJlYWQiXX0.gOtjBxB38No2rhTa-RSeMkpbwcniu0dmZT66aQmTr3XYr4HfkHr3yj6XL11FJn6ud0kXVFhmdJJu8bd8Dw1a1TNFgAhiyzkjsWFbaS0vq_M5tJkIiQ4EVLkB0eYFSclORlffip8uselh81w6sImh7HuQg7iCKASkOp2Ab_8SwcLD656Yskp1VNPn9LOZH7TghElbawPrDefXot3Qianql2V-oSLb6-jDw48kMqkY71afnc2E7q4bgY5BA028uXfr97ppEjcD5puZaRKoscciuVAoRJcMJzOoh2_pC6bJPoZLFj3biPl7Nwo01IfmPNF8tNG8CCDhc0KbYxhaXgOpSg
 Content-Type: application/json
 Accept: application/json
 Accept-Charset: utf-8
 
-{
-	"From":"US",
-	"To":"DK"
-}
+
 
 ```
-With the following fields:
-| Parameter       | Type         | Required?  | Description                                                         |
-| -------------   |--------------|------------|-------------------------------------------------                    |
-| From            | string       | Optional   | Source Country Code                                                 |
-| To              | string       | required   | Destination Country Code at the moment i assumed this is for US only|
-
 The response is a Post object within a data envelope. Example response:
 
 ```
@@ -616,12 +607,25 @@ Content-Type: application/json; charset=utf-8
 {
     "status": "Success",
     "httpStatusCode": 200,
-    "result": {
-        "sourceCountry": "US",
-        "destinationCountry": "DK",
-        "exchangeRate": 6.87,
-        "exchangeRateToken": "DKK987965909090"
-    }
+    "result": [
+        {
+            "name": "Albania",
+            "code": "AL"
+        },
+        {
+            "name": "United States of America",
+            "code": "US"
+        },
+        {
+            "name": "Denmark",
+            "code": "DK"
+        },
+        {
+            "name": "Sweden",
+            "code": "SE"
+        }
+	.....
+    ]
 }
 
 ```
@@ -638,10 +642,9 @@ result Object
 
 | Field                  | Type         | Description                                                                               |
 | -----------------------|--------------|-------------------------------------------------------------------------------------------|
-| sourceCountry          | string       | Source Country Code                                                                       |
-| destinationCountry     | string       | Destination Country Code                                                                  |
-| exchangeRate           | string       | The price of a source country's money in relation to destination country's money.         |
-| exchangeRateToken      | string       | exchangeRate releted unique token                                                         |
+| name                   | string       | Name of country                                                                           |
+| code                   | string       | ISO Code for country                                                                      |
+
 
 
 Possible errors:
@@ -653,7 +656,7 @@ Possible errors:
 
 sample postman request
 
-![exchange_rate](https://user-images.githubusercontent.com/12220065/163568594-af0cfea3-28f8-4fc5-9a09-7d1c0c51bc8b.PNG)
+![countrylist](https://user-images.githubusercontent.com/12220065/163656582-5cc7246f-a132-4cb2-9b7e-88189064e606.PNG)
 
 
 ### 5.8. Get Fees List
