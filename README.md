@@ -22,6 +22,9 @@ created by : Thilini Kaluthanthri
   - [Get Country List](#57-Get-Country-List)
   - [Get Fees List](#58-Get-Fees-List)
 - [Testing](#6-testing)
+ - [Integration tests](#61-integration-tests)
+ - [Unit Test](#62-Unit-Test)
+
 
 
 ## 1. Overview
@@ -745,8 +748,11 @@ sample postman request
 
 
 ## 6. Testing
-I do not included sandbox environment yet. but included few xunit intergration test for token validation 
-please refer the below repository for access intergartion tests
+I do not included sandbox environment yet.
+
+###  6.1. Integration Tests
+
+Included few xunit intergration test for token validation please refer the below repository for access intergartion tests
 
 https://github.com/TKaluthanthri/Majority.RemittanceProvider.IntegrationTest
 
@@ -754,4 +760,9 @@ these are the test cases i've implemented
 
 ![testcases](https://user-images.githubusercontent.com/12220065/163662791-f67456f2-6bf3-4c3f-a8fb-792fb217e699.PNG)
 
+###  6.1. Unit Tests
+
+unit test done for some controller methods
+
+![unit test](https://user-images.githubusercontent.com/12220065/163695247-3a899e6e-5133-4bab-8b53-a924672d6b81.PNG)
 
