@@ -22,8 +22,8 @@ created by : Thilini Kaluthanthri
   - [Get Country List](#57-Get-Country-List)
   - [Get Fees List](#58-Get-Fees-List)
 - [Testing](#6-testing)
- - [Integration tests](#61-integration-tests)
- - [Unit Test](#62-Unit-Test)
+  - [Integration tests](#61-integration-tests)
+  - [Unit Test](#62-Unit-Test)
 
 
 
