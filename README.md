@@ -34,8 +34,20 @@ Majority.RemittanceProvider API is a JSON-based general money transfer REST API.
 ## 2. Applications
 
 ###  2.1. Majority.RemittanceProvider.API
+
 Technologies Used : C# , repository patteren, SQL database, Dapper, layered architecture
+
 ###  2.2. Majority.RemittanceProvider.IdentityServer
+
+This is OAuth2 Client Credential flow used authentication application. it's having the  ability to request a token outside of the context of a user. since  it's not provided a specific user to authenticate, i used client credentials flow.
+Through this application user can request token for access RemittanceProvider.API resocures. Token validity time would be 3600s 
+
+Technologies Used : IdentityServer4, IdentityServer4.AccessTokenValidation
+
+###  2.3. Majority.RemittanceProvider.UnitTest
+
+This Application Contains xunit test cases for Majority.RemittanceProvider.API
+
 
 ## 3. Authentication
 For Authentication purpose The client will request an access token from the Identity Server using its client ID and secret and then use the token to gain access to the API
