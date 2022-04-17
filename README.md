@@ -7,9 +7,9 @@ created by : Thilini Kaluthanthri
 
 - [Overview](#1-overview)
 - [Applications](#2-Applications)
-  - [Majority.RemittanceProvider.API](#21Majority.RemittanceProvider.API)
-  - [Majority.RemittanceProvider.IdentityServer](#22Majority.RemittanceProvider.IdentityServer)
-  - [Majority.RemittanceProvider.UnitTest](#23Majority.RemittanceProvider.UnitTest)
+  - [Majority.RemittanceProvider.API](#21-Majority.RemittanceProvider.API)
+  - [Majority.RemittanceProvider.IdentityServer](#22-Majority.RemittanceProvider.IdentityServer)
+  - [Majority.RemittanceProvider.UnitTest](#23-Majority.RemittanceProvider.UnitTest)
 - [Authentication](#3-authentication)
 - [Database Diagram](#4-DBDiagram)
 - [Resources](#5-Resources)
