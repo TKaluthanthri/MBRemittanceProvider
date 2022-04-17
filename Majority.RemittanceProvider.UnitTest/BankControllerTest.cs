@@ -20,9 +20,21 @@ namespace Majority.RemittanceProvider.UnitTest
         }
 
         [Fact]
-        public async Task GetAllBanks_InRepoAsync()
+        public async Task GetAllAsync_ShouldReturn440FailedStatus()
         {
             
+            bankRepository.Setup(x => x.GetAllBanksAsync()).Returns(BankMockData.GetEmptySampleBankList());
+            var controller = new BankController(null, bankRepository.Object);
+            /// Act
+            var result = (GenericUseCaseResult)await controller.GetAllBanks();
+            /// Assert
+            result.HttpStatusCode.ShouldBe(440);
+        }
+
+        [Fact]
+        public async Task GetAllBanks_ShouldReturn200Status()
+        {
+
             bankRepository.Setup(x => x.GetAllBanksAsync()).Returns(BankMockData.GetSampleBankList());
             var controller = new BankController(null, bankRepository.Object);
             /// Act
@@ -30,10 +42,5 @@ namespace Majority.RemittanceProvider.UnitTest
             /// Assert
             result.HttpStatusCode.ShouldBe(200);
         }
-
-
-
-
-
     }
 }

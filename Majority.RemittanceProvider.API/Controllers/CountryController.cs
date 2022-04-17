@@ -45,7 +45,8 @@ namespace Majority.RemittanceProvider.API.Controllers
                 }
                 else
                 {
-                    response.Status = Enum.GetName(Codes.InvalidRequest);
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Failed);
+                    response.Status = Enum.GetName(Codes.Failed);
                     response.Result = new { message = "No Available countries" };
                 }
             }

@@ -12,31 +12,6 @@ namespace Majority.RemittanceProvider.UnitTest
     {
         public static async Task<List<Bank>> GetSampleBankList()
         {
-            //List<Bank> output = new List<Bank>
-            //{
-            //    new Bank
-            //    {
-            //        Id = 1,
-            //        BankCode = "WFBIUS6S",
-            //        Name =  "Wells Fargo",
-            //        Country_Id = "5"
-            //    },
-            //     new Bank
-            //    {
-            //        Id = 2,
-            //        BankCode = "125200934",
-            //        Name =  "Northrim bank",
-            //        Country_Id = "5"
-            //    },
-            //      new Bank
-            //    {
-            //        Id = 3,
-            //        BankCode = "DKW56257",
-            //        Name =  "Jyske Bank",
-            //        Country_Id = "5"
-            //    },
-
-            //};
             return await Task.FromResult(new List<Bank>
             {
                 new Bank
@@ -64,6 +39,23 @@ namespace Majority.RemittanceProvider.UnitTest
             });
         }
 
+
+        public static async Task<List<Bank>> GetEmptySampleBankList()
+        {
+            return await Task.FromResult(new List<Bank>());
+        }
+
+        public static async Task<Bank> GetBankByCodeAsync()
+        {
+            return await Task.FromResult(new Bank
+            {
+                Id = 3,
+                BankCode = "DKW56257",
+                Name = "Jyske Bank",
+                Country_Id = "5"
+
+            });
+        }
 
     }
 }

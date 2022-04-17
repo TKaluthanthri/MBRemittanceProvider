@@ -40,14 +40,24 @@ namespace Majority.RemittanceProvider.API.Controllers
             try
             {
                 var bankList = await _bankRepository.GetAllBanksAsync();
-                response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
-                response.Status = Enum.GetName(Codes.Success);
+                if (bankList.Count > 0)
+                {
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
+                    response.Status = Enum.GetName(Codes.Success);
 
-                response.Result = (from bank in bankList
-                                   select new { bank.Name, bank.BankCode }).ToArray();
+                    response.Result = (from bank in bankList
+                                       select new { bank.Name, bank.BankCode }).ToArray();
+                }
+                else {
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.Failed);
+                    response.Status = Enum.GetName(Codes.Failed);
+                    response.Result = new { Message = "Failed to get list of countries" };
+                }
+                
             }
             catch (Exception ex)
             {
+                response.HttpStatusCode = Convert.ToInt32(ResponseCode.Failed);
                 response.Status = Enum.GetName(Codes.Failed);
                 response.Result = new { Error = ex.Message };
                 _logger.LogError("Error Bank Controller:" + ex.InnerException);
@@ -66,13 +76,14 @@ namespace Majority.RemittanceProvider.API.Controllers
                 if (!String.IsNullOrEmpty(request.AccountNumber) && !String.IsNullOrEmpty(request.BankCode))
                 {
                     var accountDetails = await _bankRepository.GetBeneficiaryName(request.AccountNumber, request.BankCode);
+                    string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "") + " " + (!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "");
                     response.HttpStatusCode = Convert.ToInt32(ResponseCode.Success);
                     response.Status = Enum.GetName(Codes.Success);
-                    string fullName = (!String.IsNullOrEmpty(accountDetails.FirstName) ? accountDetails.FirstName : "") + " " + (!String.IsNullOrEmpty(accountDetails.LastName) ? accountDetails.LastName : "");
                     response.Result = new { accountName = fullName };
                 }
                 else
                 {
+                    response.HttpStatusCode = Convert.ToInt32(ResponseCode.InvalidRequest);
                     response.Status = Enum.GetName(Codes.InvalidRequest);
                     response.Result = new { Error = "Failed to get Beneficiary Name " };
                 }

@@ -17,7 +17,7 @@ namespace Majority.RemittanceProvider.API.Controllers
     public class TransactionController : ControllerBase
     {
 
-        private readonly ILogger<BankController> _logger;
+        private readonly ILogger<TransactionController> _logger;
         private readonly ApplicationConfigurations _appConfiguration;
         private readonly ICountryRepository _countryRepository;
         private readonly IBankRepository _bankRepository;
@@ -25,7 +25,7 @@ namespace Majority.RemittanceProvider.API.Controllers
         private readonly ICustomerRepository _customerRepository;
 
         public TransactionController(
-            ILogger<BankController> logger,
+            ILogger<TransactionController> logger,
             ApplicationConfigurations appConfiguration,
             ICountryRepository countryRepository,
             IBankRepository bankRepository,
@@ -66,7 +66,7 @@ namespace Majority.RemittanceProvider.API.Controllers
                 }
                 else
                 {
-                    response.Status = Enum.GetName(Codes.Failed);
+                    response.Status = Enum.GetName(Codes.InvalidRequest);
                     response.HttpStatusCode = Convert.ToInt32(ResponseCode.InvalidRequest);
                     response.Result = new { Error = "Failed to get ExchangeRates" };
                 }
