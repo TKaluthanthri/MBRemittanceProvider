@@ -1,4 +1,4 @@
-# Majority.RemittanceProvider API documentation
+# Majority.RemittanceProvider V1.0 Documentation
 
 This repository contains the documentation for Majority.RemittanceProvider API.
 created by : Thilini Kaluthanthri
